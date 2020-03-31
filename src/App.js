@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import {Container} from "@material-ui/core";
+import Navbar from "./Components/Navbar/Navbar";
+import {Route, Switch, Redirect, BrowserRouter} from 'react-router-dom'
+import Home from "./Pages/Home";
+import About from "./Pages/About";
+import Profile from "./Pages/Profile";
+import AlertComponent from "./Components/AlertComponent/AlertComponent";
+import AlertState from "./context/alert/alertState";
+import GithubState from "./context/github/githubState";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    return(
+        <GithubState>
+        <AlertState>
+            <BrowserRouter>
+                <Navbar/>
+
+                <Container>
+                    <AlertComponent
+                        text={'Test Alert'}
+                    />
+                    <Switch>
+                        <Route exact path="/" component={Home}/>
+                        <Route path="/about" component={About}/>
+                        <Route path="/profile/:name" component={Profile}/>
+                        <Redirect to={"/"}/>
+                    </Switch>
+                </Container>
+            </BrowserRouter>
+        </AlertState>
+        </GithubState>
+    )
 }
 
 export default App;

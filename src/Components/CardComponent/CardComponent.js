@@ -5,7 +5,6 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import img from '../../img/s1200.webp'
 import {withRouter} from 'react-router-dom'
 
 const useStyles = makeStyles({
@@ -13,33 +12,33 @@ const useStyles = makeStyles({
         maxWidth: 345,
     },
     media: {
-        height: 140,
+        height: 200,
     },
+    title:{
+        maxWidth: '100%',
+        wordBreak: 'break-all'
+    }
 });
 
 const CardComponent = props => {
     const classes = useStyles();
-    const onCardClickHandler=()=>{
-        props.history.push('/profile/:name')
+    const onCardClickHandler=(login)=>{
+        props.history.push(`/profile/${login}`)
     };
 
     return (
         <Card className={classes.root}>
             <CardActionArea
-                onClick={onCardClickHandler}
+                onClick={()=>onCardClickHandler(props.title)}
             >
                 <CardMedia
                     className={classes.media}
-                    image={img}
-                    title="Contemplative Reptile"
+                    image={props.avatar}
+                    title="Avatar"
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        Lizard
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
+                    <Typography className={classes.title} gutterBottom variant="h5" component="h2">
+                        {props.title}
                     </Typography>
                 </CardContent>
             </CardActionArea>
