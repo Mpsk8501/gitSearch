@@ -1,0 +1,14 @@
+
+@import "utils/mixins";
+@import "utils/fonts";
+@import "utils/reset";
+
+html{
+  font-family: Montserrat,sans-serif;
+}
+
+h1{
+  font-size: 33px;
+  font-weight: bold;
+
+}
